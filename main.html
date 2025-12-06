@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lastenkarle – Modern Redesign (Red Theme)</title>
+  <style>
+    /* --- VARIABLES & RESET --- */
+    :root {
+      --color-primary: #E74C3C; /* Vibrant Red */
+      --color-accent: #F39C12;  /* Amber Accent */
+      --color-text: #2C3E50;    /* Dark Navy for Text */
+      --color-light-bg: #ECF0F1;/* Light Gray/Blue */
+      --color-white: #FFFFFF;
+      --font-family: 'Arial', sans-serif;
+      --spacing-l: 2.5rem;
+      --spacing-m: 1.5rem;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--color-text);
+      line-height: 1.6;
+      background-color: var(--color-white);
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: var(--color-accent);
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin-bottom: var(--spacing-m);
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: var(--spacing-l);
+      font-weight: 700;
+    }
+
+    /* --- UTILITY CLASSES --- */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-m);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 50px; /* Pill shape for modern look */
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-align: center;
+      border: 2px solid transparent;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    .btn-primary:hover {
+      background-color: #C0392B;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-secondary {
+      background-color: var(--color-white);
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* --- HEADER & NAVIGATION --- */
+    .header {
+      background-color: var(--color-white);
+      padding: 0.8rem 0;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--color-primary);
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+    }
+
+    .nav-links li:not(:last-child) {
+      margin-right: var(--spacing-m);
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      color: var(--color-text);
+      padding: 0.5rem 1rem;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      background: linear-gradient(135deg, var(--color-light-bg) 0%, var(--color-white) 100%);
+      padding: 8rem 0 6rem;
+      text-align: center;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-m);
+      font-weight: 900;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: var(--spacing-l);
+      color: #555;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-actions .btn {
+      margin: 0 0.75rem;
+    }
+
+    /* --- SECTION STYLING --- */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-light {
+      background-color: var(--color-light-bg);
+    }
+
+    /* --- HOW IT WORKS (STEPS) --- */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-l);
+      text-align: left;
+    }
+
+    .step-card {
+      padding: var(--spacing-l);
+      background: var(--color-white);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-left: 5px solid var(--color-primary);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      border-left-color: var(--color-accent);
+    }
+
+    .step-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--color-accent);
+      margin-bottom: var(--spacing-m);
+      display: block;
+    }
+
+    .step-card h3 {
+      font-size: 1.6rem;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+
+    /* --- LOCATIONS (BADGES) --- */
+    .locations-container {
+      text-align: center;
+    }
+
+    .location-badge {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      margin: 0.75rem;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      border-radius: 30px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .location-badge:hover {
+      background-color: var(--color-accent);
+      transform: scale(1.05) rotate(1deg);
+    }
+
+    /* --- NEWS (CARDS) --- */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--spacing-l);
+    }
+
+    .news-card {
+      border-radius: 15px;
+      overflow: hidden;
+      background: var(--color-white);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    .news-card-content {
+      padding: var(--spacing-l);
+    }
+
+    .news-card h3 {
+      color: var(--color-primary);
+      font-size: 1.6rem;
+    }
+
+    .news-meta {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      background-color: var(--color-text);
+      color: var(--color-light-bg);
+      padding: 4rem 0 2rem;
+      font-size: 0.95rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-l);
+    }
+
+    .footer h4 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-m);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .footer ul {
+      list-style: none;
+    }
+
+    .footer ul a {
+      color: var(--color-light-bg);
+      display: block;
+      padding: 0.3rem 0;
+    }
+
+    .footer ul a:hover {
+      color: var(--color-accent);
+    }
+
+    .social-links a {
+      display: inline-block;
+      font-size: 1.8rem;
+      margin-right: var(--spacing-m);
+      color: var(--color-light-bg);
+    }
+
+    .social-links a:hover {
+      color: var(--color-accent);
+    }
+
+    .footer-bottom {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+
+    /* --- RESPONSIVENESS (MEDIA QUERIES) --- */
+    @media (max-width: 992px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 2.2rem;
+      }
+      .hero {
+        padding: 6rem 0 4rem;
+      }
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hero-actions .btn {
+        margin: 0.5rem 0;
+        width: 80%;
+      }
+
+      /* Mobile Navigation */
+      .nav-links, .nav-actions {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: var(--color-white);
+        position: absolute;
+        top: 65px;
+        left: 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-links li {
+        margin: 0 !important;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--color-light-bg);
+      }
+
+      .nav-actions .btn {
+        width: 90%;
+        margin: 0.75rem auto;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links.active, .nav-actions.active {
+        display: flex;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-grid > div {
+        margin-bottom: var(--spacing-l);
+      }
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 5px;
+      z-index: 1100;
+    }
+
+    .bar {
+      width: 28px;
+      height: 3px;
+      background-color: var(--color-text);
+      margin: 4px 0;
+      transition: 0.4s;
+      border-radius: 2px;
+    }
+
+    .menu-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active .bar:nth-child(1) {
+      transform: translate(0, 7px) rotate(-45deg);
+    }
+
+    .menu-toggle.active .bar:nth-child(3) {
+      transform: translate(0, -7px) rotate(45deg);
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container nav-content">
+    <div class="logo">Lastenkarle</div>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#ausleihen">Ausleihen</a></li>
+        <li><a href="#mitmachen">Mitmachen</a></li>
+        <li><a href="#ueber-uns">Über uns</a></li>
+        <li><a href="#aktuelles">Aktuelles</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions" id="navActions">
+      <a href="#" class="btn btn-secondary" style="border-radius: 5px;">SPENDEN</a>
+      <a href="#" class="btn btn-primary" style="border-radius: 5px; margin-left: 0.5rem;">Anmelden</a>
+    </div>
+
+    <div class="menu-toggle" id="menuToggle">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h1>Dein Weg zum Lastenrad – Kostenfrei & Unkompliziert</h1>
+    <p>Lastenkarle ist dein **kostenfreies** Lastenrad-Leihsystem für nachhaltige Mobilität in der Region Karlsruhe. Mach mit und erlebe die Freiheit des Lastentransports.</p>
+    <div class="hero-actions">
+      <a href="#ausleihen" class="btn btn-primary">Jetzt Rad buchen</a>
+      <a href="#mitmachen" class="btn btn-secondary">Aktiv werden & Unterstützen</a>
+    </div>
+  </div>
+</section>
+
+<section id="ausleihen">
+  <div class="container">
+    <h2>🚲 So funktioniert die Ausleihe</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <span class="step-number">1</span>
+        <h3>Registrieren & Buchen</h3>
+        <p>Erstelle dein Konto und wähle dein gewünschtes Lastenrad an einer Station deiner Wahl.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-number">2</span>
+        <h3>Abholen</h3>
+        <p>Hole das Rad zur vereinbarten Zeit ab. Bringe bitte deinen Ausweis zur Verifikation mit.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-number">3</span>
+        <h3>Fahren & Nutzen</h3>
+        <p>Nutze das Rad für deinen Transport. Gehe sorgsam damit um, damit es lange hält.</p>
+      </div>
+      <div class="step-card">
+        <span class="step-number">4</span>
+        <h3>Zurückbringen</h3>
+        <p>Gib das Lastenrad pünktlich und persönlich an der ursprünglichen Station zurück.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="standorte" class="section-light">
+  <div class="container locations-container">
+    <h2>📍 Unsere Standorte</h2>
+    <p style="font-size: 1.1rem; margin-bottom: 2rem;">Finde unsere Räder in deiner Nähe:</p>
+    <div>
+      <span class="location-badge">Karlsruhe</span>
+      <span class="location-badge">Eggenstein</span>
+      <span class="location-badge">Baden-Baden</span>
+      <span class="location-badge">Bruchsal</span>
+      <span class="location-badge">Malsch</span>
+      <span class="location-badge" style="background-color: var(--color-accent);">Werde Station!</span>
+    </div>
+  </div>
+</section>
+
+<section id="aktuelles">
+  <div class="container">
+    <h2>📰 Aktuelle Meldungen</h2>
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-card-content">
+          <h3>Neue Station: SteamWork | GoodSpaces</h3>
+          <span class="news-meta">10. September 2025</span>
+          <p>Zwei weitere Lastenräder sind nun in der Südweststadt verfügbar! Hier gibt es alle Details zum Verleihstart.</p>
+          <a href="#" class="btn-secondary btn" style="margin-top: 1rem; padding: 0.6rem 1.2rem; border-radius: 5px;">Zum Beitrag</a>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-card-content">
+          <h3>Lastenkarle jetzt auch in Eggenstein</h3>
+          <span class="news-meta">26. Juli 2025</span>
+          <p>Ab sofort steht unsere beliebte Bakfiets Classic in Eggenstein für euch zur Buchung bereit.</p>
+          <a href="#" class="btn-secondary btn" style="margin-top: 1rem; padding: 0.6rem 1.2rem; border-radius: 5px;">Zum Beitrag</a>
+        </div>
+      </div>
+      <div class="news-card">
+        <div class="news-card-content">
+          <h3>Projekt-Meilenstein: Die neue Rikscha ist da!</h3>
+          <span class="news-meta">15. Juli 2025</span>
+          <p>Dank eurer Spenden ist unsere brandneue Rikscha eingetroffen! Wir danken allen Unterstützern.</p>
+          <a href="#" class="btn-secondary btn" style="margin-top: 1rem; padding: 0.6rem 1.2rem; border-radius: 5px;">Zum Beitrag</a>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="#" class="btn btn-secondary">Alle Neuigkeiten & Events</a>
+    </div>
+  </div>
+</section>
+
+<section id="mitmachen" class="section-light">
+  <div class="container" style="text-align: center;">
+    <h2>🤝 Jetzt Mitmachen und die Region stärken!</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 2.5rem; max-width: 800px; margin-left: auto; margin-right: auto;">Als rein ehrenamtliche Initiative leben wir von Mitgliedsbeiträgen und Spenden. Deine Unterstützung hält uns am Laufen und erweitert unser Angebot!</p>
+    <a href="#" class="btn btn-primary">Mitglied werden</a>
+    <a href="#" class="btn btn-secondary" style="margin-left: 1rem;">Spenden (Steuerlich absetzbar)</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <h4>Lastenkarle e.V.</h4>
+        <p>Lastenrad-Initiative für die Region Karlsruhe e.V. Wir fördern ökologisch nachhaltigen Transport.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#ausleihen">Rad Ausleihen</a></li>
+          <li><a href="#mitmachen">Mitglied werden</a></li>
+          <li><a href="#">Team</a></li>
+          <li><a href="#aktuelles">Events</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="#">Nutzungsbedingungen</a></li>
+          <li><a href="#">Datenschutzerklärung</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">AGB</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h4>Folge uns</h4>
+        <div class="social-links">
+          <a href="#" target="_blank">Facebook</a>
+          <a href="#" target="_blank">Instagram</a>
+        </div>
+        <address style="margin-top: 1rem;">
+          Kronenstr. 9<br>
+          76133 Karlsruhe
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 Lastenkarle. Alle Rechte vorbehalten.
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const navActions = document.getElementById('navActions');
+    const navItems = document.querySelectorAll('#navLinks a, #navActions a');
+
+    menuToggle.addEventListener('click', function() {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      navActions.classList.toggle('active');
+    });
+
+    // Close menu when a link is clicked
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // Only close if the menu is active (mobile view)
+        if (navLinks.classList.contains('active')) {
+          menuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          navActions.classList.remove('active');
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
