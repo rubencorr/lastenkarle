@@ -8,9 +8,11 @@
   <style>
     /* --- VARIABLES & RESET --- */
     :root {
-      --color-primary-dark: #922B21; /* Dunkles, edles Rot */
-      --color-primary-light: #C0392B; /* Helles Rot für Akzente */
-      --color-accent: #F39C12;  /* Orange/Amber für CTA */
+      /* NEU: B0040E als Primärrot */
+      --color-primary-dark: #B0040E; /* Tiefes, kühles Rot (b0040e) */
+      --color-primary-light: #D52D37; /* Leicht helleres Rot für Akzente */
+      /* NEU: FADCE0 als Akzent */
+      --color-accent: #FADCE0;  /* Heller, cremiger Akzent (fadce0) */
       --color-text: #2C3E50;    /* Dark Navy for Text */
       --color-bg-light: #F4F4F4;/* Sehr helles Grau für Inhalte */
       --color-white: #FFFFFF;
@@ -82,14 +84,14 @@
     }
 
     .btn-primary {
-      background-color: var(--color-accent); /* Orange/Amber für Haupt-CTA */
+      background-color: var(--color-accent); /* NEU: Heller Akzent für Haupt-CTA */
       color: var(--color-text);
     }
 
     .btn-primary:hover {
-      background-color: #E67E22;
+      background-color: #F4C1C8; /* Dunklere Variante des neuen Akzents für Hover */
       transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(243, 156, 18, 0.3);
+      box-shadow: 0 8px 15px rgba(176, 4, 14, 0.3); /* Schattenfarbe angepasst */
     }
 
     .btn-secondary {
@@ -136,7 +138,7 @@
     }
     
     .logo i {
-        color: var(--color-accent);
+        color: var(--color-accent); /* NEU: Akzentfarbe für Icon */
         margin-right: 0.5rem;
     }
 
@@ -160,7 +162,7 @@
 
     .nav-links a:hover {
       color: var(--color-white);
-      border-color: var(--color-accent);
+      border-color: var(--color-accent); /* NEU: Akzentfarbe für Hover-Linie */
     }
     
     .nav-actions .btn {
@@ -189,10 +191,13 @@
         right: 0;
         bottom: 0;
         left: 0;
-        /* Dein bereitgestellter Bildpfad */
-        background: url('media/lastenraeder-1.jpg') no-repeat center center/cover;
+
+        /* Hintergrundbild */
+        background: url('media/IMG_6556.jpg') no-repeat center center/cover;
+        /* background: url('media/lastenraeder-1.jpg') no-repeat center center/cover; Alternatives Hintergrundbild */ 
+
         /* Dunkles Overlay, um Text lesbar zu machen */
-        background-color: rgba(146, 43, 33, 0.8); /* Dark-Red Overlay */
+        background-color: rgba(176, 4, 14, 0.85); /* NEU: Dark-Red Overlay (b0040e) */
         background-blend-mode: multiply; /* Mischt die Farbe mit dem Bild */
         opacity: 1; /* Volle Opazität des Overlays */
         z-index: 1;
@@ -389,7 +394,7 @@
     }
     
     .footer a:hover {
-        color: var(--color-accent);
+        color: var(--color-accent); /* NEU: Akzentfarbe für Hover */
     }
     
     /* --- RESPONSIVENESS --- */
