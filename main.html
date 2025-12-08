@@ -279,11 +279,51 @@
       font-size: 3rem;
       color: var(--color-primary-dark);
       margin-bottom: 1rem;
+      position: relative; /* Container for absolute positioning */
+      height: 3rem; /* Ensure container has height */
+      display: flex; /* Helps centering */
+      justify-content: center;
+      align-items: center;
     }
     
     .step-card h3 {
         font-size: 1.4rem;
         color: var(--color-text);
+    }
+    
+    /* Schloss Transition (Schritt 2) */
+    .step-card:nth-child(2) .step-icon i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .step-card:nth-child(2) .fa-lock-open {
+        opacity: 0;
+    }
+    
+    .step-card:nth-child(2):hover .fa-lock {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+
+    .step-card:nth-child(2):hover .fa-lock-open {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    
+    /* NEU: Dreh-Effekt (Schritt 4) */
+    /* Füge eine Transition für die Transformation zum Icon hinzu */
+    .step-card:nth-child(4) .step-icon i {
+        transition: transform 0.6s ease-in-out; /* 0.6 Sekunden Dreh-Übergang */
+        display: block; /* Stellen Sie sicher, dass Transform angewendet werden kann */
+    }
+
+    /* Beim Hover der vierten Karte (Zurückbringen) */
+    .step-card:nth-child(4):hover .step-icon i {
+        transform: rotate(-360deg); /* Volle 360-Grad-Drehung */
     }
 
     /* --- LOCATIONS (Map & Side Content) --- */
@@ -541,16 +581,22 @@
         <h3>Registrieren & Buchen</h3>
         <p>Erstelle Dein Konto und reserviere Dein Wunschrad online in Echtzeit.</p>
       </div>
+      
       <div class="step-card">
-        <div class="step-icon"><i class="fas fa-lock-open"></i></div>
+        <div class="step-icon">
+            <i class="fas fa-lock"></i> 
+            <i class="fas fa-lock-open"></i>
+        </div>
         <h3>Abholen</h3>
         <p>Hole das Rad zur vereinbarten Zeit an der Station ab und starte die Tour.</p>
       </div>
+      
       <div class="step-card">
         <div class="step-icon"><i class="fas fa-box-open"></i></div>
         <h3>Fahren & Nutzen</h3>
         <p>Transportiere alles, was Du benötigst – umweltfreundlich und stressfrei.</p>
       </div>
+      
       <div class="step-card">
         <div class="step-icon"><i class="fas fa-undo-alt"></i></div>
         <h3>Zurückbringen</h3>
