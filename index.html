@@ -3,26 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lastenkarle</title>
+  <title>Lastenkarle - Dein Lastenrad in Karlsruhe</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* --- VARIABLES & RESET --- */
+    /* ---------------------------------
+       --- VARIABLES & RESET (Modern) --- 
+       ---------------------------------- */
     :root {
-      /* NEU: B0040E als Primärrot */
+      /* Farben (Beibehalten) */
       --color-primary-dark: #B0040E; /* Tiefes, kühles Rot (b0040e) */
       --color-primary-light: #D52D37; /* Leicht helleres Rot für Akzente */
-      /* NEU: FADCE0 als Akzent */
       --color-accent: #FADCE0;  /* Heller, cremiger Akzent (fadce0) */
       --color-text: #2C3E50;    /* Dark Navy for Text */
-      --color-bg-light: #F4F4F4;/* Sehr helles Grau für Inhalte */
+      --color-bg-light: #F7F7F7;/* Ultrahelles Grau für Inhalte */
       --color-white: #FFFFFF;
+      /* NEU: Schatten-Farbe (subtiler als Schwarz) */
+      --color-shadow: rgba(44, 62, 80, 0.2); 
+      
+      /* Typografie */
       --font-family: 'Inter', 'Arial', sans-serif;
-      --spacing-xl: 4rem;
-      --spacing-l: 2.5rem;
+      --font-weight-bold: 700;
+      --font-weight-extra: 900;
+      
+      /* Abstände */
+      --spacing-xl: 6rem; /* Mehr vertikaler Raum */
+      --spacing-l: 3rem;
       --spacing-m: 1.5rem;
-      --header-height: 80px;
+      --spacing-s: 1rem;
+      --header-height: 70px; /* Leicht niedriger */
     }
 
+    /* Reset */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -32,7 +44,7 @@
     body {
       font-family: var(--font-family);
       color: var(--color-text);
-      line-height: 1.6;
+      line-height: 1.7; /* Mehr Zeilenhöhe für besseres Lesen */
       background-color: var(--color-white);
       scroll-behavior: smooth;
     }
@@ -40,63 +52,76 @@
     a {
       color: var(--color-primary-dark);
       text-decoration: none;
-      transition: color 0.3s;
+      transition: color 0.3s, transform 0.2s;
     }
 
     a:hover {
-      color: var(--color-accent);
+      color: var(--color-primary-light);
     }
 
     h1, h2, h3 {
-      line-height: 1.2;
+      line-height: 1.1;
       margin-bottom: var(--spacing-m);
-      font-weight: 700;
+      font-weight: var(--font-weight-extra);
+      color: var(--color-text);
     }
 
     h2 {
-      font-size: 2.5rem;
+      font-size: 3rem; /* Größer und prägnanter */
       text-align: center;
       margin-bottom: var(--spacing-l);
-      font-weight: 800;
-      color: var(--color-text);
+      position: relative;
+    }
+    
+    /* Unterstrich-Effekt für h2 */
+    h2::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 4px;
+        background-color: var(--color-primary-light);
+        margin: 0.5rem auto 0;
+        border-radius: 2px;
     }
 
     /* --- UTILITY CLASSES --- */
     .container {
-      max-width: 1280px;
+      max-width: 1300px;
       margin: 0 auto;
       padding: 0 var(--spacing-m);
     }
-
-    /* Buttons */
+    
+    /* Buttons (Modern Ghost/Sharp Look) */
     .btn {
       display: inline-block;
-      padding: 1rem 2.2rem;
-      border-radius: 8px; /* Moderner, scharfer Look */
-      font-weight: bold;
+      padding: 1rem 2.5rem;
+      border-radius: 4px; /* Scharfe Kanten für modernen Look */
+      font-weight: var(--font-weight-bold);
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smoother Transition */
       cursor: pointer;
       text-align: center;
       border: 2px solid transparent;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
     .btn-primary {
-      background-color: var(--color-accent); /* NEU: Heller Akzent für Haupt-CTA */
-      color: var(--color-text);
+      background-color: var(--color-primary-light); 
+      color: var(--color-white);
+      border-color: var(--color-primary-light);
     }
 
     .btn-primary:hover {
-      background-color: #F4C1C8; /* Dunklere Variante des neuen Akzents für Hover */
-      transform: translateY(-3px);
-      box-shadow: 0 8px 15px rgba(176, 4, 14, 0.3); /* Schattenfarbe angepasst */
+      background-color: var(--color-primary-dark);
+      border-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(176, 4, 14, 0.4); 
     }
 
     .btn-secondary {
       background-color: transparent;
-      color: var(--color-white); /* Weißer Text auf dunklem Hero */
+      color: var(--color-white); 
       border-color: var(--color-white);
       box-shadow: none;
     }
@@ -104,22 +129,40 @@
     .btn-secondary:hover {
       background-color: var(--color-white);
       color: var(--color-primary-dark);
-      transform: translateY(-3px);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2); 
+    }
+    
+    /* Neu: Dark Button für helle Sektionen */
+    .btn-dark {
+        background-color: var(--color-text);
+        color: var(--color-white);
+        border-color: var(--color-text);
+    }
+    .btn-dark:hover {
+        background-color: var(--color-primary-dark);
+        border-color: var(--color-primary-dark);
+        color: var(--color-white);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(44, 62, 80, 0.3);
     }
     
     .btn-small {
-        padding: 0.75rem 1.5rem;
+        padding: 0.75rem 1.8rem;
         font-size: 0.9rem;
     }
 
-    /* --- HEADER & NAVIGATION (Dunkles Rot/Sticky) --- */
+    /* ---------------------------------
+       --- HEADER & NAVIGATION (Blurred Sticky) --- 
+       ---------------------------------- */
     .header {
-      background-color: var(--color-primary-dark);
+      background-color: rgba(176, 4, 14, 0.9); /* Subtile Transparenz */
       height: var(--header-height);
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px); 
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
     }
@@ -131,11 +174,10 @@
     }
 
     .logo {
-      font-size: 1.8rem;
-      font-weight: 900;
+      font-size: 2rem;
+      font-weight: var(--font-weight-extra);
       color: var(--color-white);
-      letter-spacing: -1px;
-      line-height: 1; /* Fix for alignment */
+      letter-spacing: -0.5px;
     }
     
     .logo a {
@@ -143,41 +185,41 @@
     }
 
     .logo i {
-        color: var(--color-accent); /* NEU: Akzentfarbe für Icon */
+        color: var(--color-accent); 
         margin-right: 0.5rem;
     }
 
     .nav-links {
       list-style: none;
       display: flex;
-      margin-left: 2rem;
     }
 
     .nav-links li:not(:last-child) {
-      margin-right: var(--spacing-m);
+      /* Geänderter Abstand für lockere Navigation */
+      margin-right: 2.5rem; 
     }
 
     .nav-links a {
       font-weight: 600;
-      color: rgba(255, 255, 255, 0.8);
-      padding: 0.5rem 1rem;
-      border-bottom: 3px solid transparent;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent; /* Dünnere Linie */
       transition: color 0.3s, border-color 0.3s;
-      display: block; /* Wichtig für Dropdown-Links */
+      display: block; 
     }
 
     .nav-links a:hover {
       color: var(--color-white);
-      border-color: var(--color-accent); /* NEU: Akzentfarbe für Hover-Linie */
+      border-color: var(--color-accent); 
     }
     
     .nav-actions .btn {
-        margin-left: 0.75rem;
-        padding: 0.75rem 1.5rem;
+        margin-left: var(--spacing-s);
+        padding: 0.6rem 1.2rem; /* Etwas kleiner als Header-Buttons */
         box-shadow: none;
     }
 
-    /* --- DROPDOWN STYLING (NEW) --- */
+    /* DROPDOWN STYLING */
     .dropdown {
         position: relative;
     }
@@ -185,24 +227,22 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: var(--color-primary-dark);
-        min-width: 180px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        background-color: rgba(176, 4, 14, 0.95); 
+        min-width: 200px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
         z-index: 100;
-        top: 100%; /* Positioniert direkt unter dem Link */
+        top: 100%; 
         left: 0;
         padding: 0.5rem 0;
-        border-radius: 0 0 8px 8px;
+        border-radius: 0 0 6px 6px;
         border-top: 3px solid var(--color-accent);
     }
 
     .dropdown-content a {
         padding: 0.75rem 1rem;
-        text-decoration: none;
         display: block;
-        text-align: left;
-        color: rgba(255, 255, 255, 0.9);
-        border-bottom: none; /* Keine Linie unter Dropdown-Links */
+        color: rgba(255, 255, 255, 0.95);
+        border-bottom: none; 
     }
 
     .dropdown-content a:hover {
@@ -213,15 +253,11 @@
     .dropdown:hover .dropdown-content {
         display: block;
     }
-
-    .dropdown > a {
-        /* Pfeil-Icon für Dropdown-Link */
-        position: relative;
-        padding-right: 2rem;
-    }
-
+    
+    /* Chevron-Anpassung */
+    .dropdown > a { position: relative; padding-right: 2rem; }
     .dropdown > a::after {
-        content: '\f078'; /* Chevron Down Icon */
+        content: '\f078'; 
         font-family: 'Font Awesome 6 Free';
         font-weight: 900;
         font-size: 0.75rem;
@@ -231,24 +267,20 @@
         transform: translateY(-50%);
         transition: transform 0.2s ease;
     }
+    .dropdown:hover > a::after { transform: translateY(-50%) rotate(180deg); }
 
-    .dropdown:hover > a::after {
-        transform: translateY(-50%) rotate(180deg);
-    }
-    
-    /* --- HERO SECTION (High-Contrast, Background Image) --- */
+
+    /* ---------------------------------
+       --- HERO SECTION (Dynamic & Centered) --- 
+       ---------------------------------- */
     .hero {
       position: relative;
-      /* Setze den Hero-Hintergrund auf das Dark-Red */
       background-color: var(--color-primary-dark);
-      padding: 6rem 0;
+      padding: 6rem 0; /* REDUZIERT: Weniger vertikaler Platz */
       overflow: hidden;
-      /* Hinzufügen einer leichten Schräge am unteren Rand für Dynamik */
-      clip-path: polygon(0 0, 100% 0, 100% 95%, 0% 100%); 
+      clip-path: none; 
     }
     
-    /* * NEU: Background Image Integration mit Overlay
-    */
     .hero::before {
         content: '';
         position: absolute;
@@ -256,15 +288,15 @@
         right: 0;
         bottom: 0;
         left: 0;
-
-        /* Hintergrundbild */
-        background: url('media/IMG_6556.jpg') no-repeat center center/cover;
-        /* background: url('media/lastenraeder-1.jpg') no-repeat center center/cover; Alternatives Hintergrundbild */ 
-
-        /* Dunkles Overlay, um Text lesbar zu machen */
-        background-color: rgba(176, 4, 14, 0.85); /* NEU: Dark-Red Overlay (b0040e) */
-        background-blend-mode: multiply; /* Mischt die Farbe mit dem Bild */
-        opacity: 1; /* Volle Opazität des Overlays */
+        
+        /* BILDPOSITION: Nach oben verschoben, um mehr vom Rad zu zeigen */
+        background: url('media/IMG_6556.jpg') no-repeat center top -50px; 
+        background-size: cover;
+        background-attachment: fixed; /* Der Parallax-Trick */
+        
+        background-color: rgba(176, 4, 14, 0.75); 
+        background-blend-mode: multiply; 
+        opacity: 1;
         z-index: 1;
     }
 
@@ -272,164 +304,172 @@
         position: relative;
         z-index: 2;
         display: flex;
-        justify-content: flex-start; /* Text linksbündig */
+        justify-content: center; 
         align-items: center;
-        min-height: 450px; /* Gibt dem Hero eine Mindesthöhe */
+        min-height: 400px; /* REDUZIERT: Weniger Container-Höhe */
+        text-align: center;
     }
     
     .hero-text {
         color: var(--color-white);
-        max-width: 50%; /* Text nimmt die linke Hälfte ein */
-        padding-right: var(--spacing-l);
+        max-width: 700px; 
+        padding: 0;
     }
 
     .hero h1 {
-      font-size: 4.5rem;
-      margin-bottom: 0.5rem;
-      font-weight: 900;
+      font-size: 5rem; 
+      margin-bottom: 1rem;
       line-height: 1;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
+      color: var(--color-white); 
     }
 
     .hero p {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       margin-bottom: var(--spacing-l);
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--color-accent); 
+      font-weight: 600;
+    }
+
+    .hero-actions .btn {
+        background-color: rgba(255, 255, 255, 0.1); 
+        border-color: var(--color-white);
+    }
+    .hero-actions .btn-primary {
+        background-color: var(--color-accent); 
+        color: var(--color-text);
+        border-color: var(--color-accent);
+    }
+    .hero-actions .btn-primary:hover {
+        background-color: var(--color-white);
+        border-color: var(--color-white);
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.4);
+    }
+    .hero-actions .btn-secondary {
+        background-color: transparent;
+    }
+    .hero-actions .btn-secondary:hover {
+        background-color: var(--color-white);
+        color: var(--color-primary-dark);
     }
     
-    /* --- SECTION STYLING --- */
+    /* ---------------------------------
+       --- SECTION STYLING (Minimalist) --- 
+       ---------------------------------- */
     section {
       padding: var(--spacing-xl) 0;
       background-color: var(--color-white);
     }
     
-    /* Der erste Abschnitt wird nach oben gezogen, um an den Schrägschnitt anzudocken */
     #ausleihen {
-      margin-top: -3rem; 
-      position: relative; 
-      z-index: 10;
-      padding-top: 5rem;
+      margin-top: 0; 
+      padding-top: var(--spacing-xl);
     }
 
     .section-dark-bg {
       background-color: var(--color-bg-light);
     }
 
-    /* --- HOW IT WORKS (Karten-Layout) --- */
+    /* ---------------------------------
+       --- HOW IT WORKS (Modern Cards) --- 
+       ---------------------------------- */
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: var(--spacing-m);
+      gap: var(--spacing-l); 
       text-align: center;
     }
 
     .step-card {
       padding: var(--spacing-l);
       background: var(--color-white);
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border-radius: 16px; 
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
       transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s;
-      border: 1px solid #ddd;
+      border: none; 
     }
 
     .step-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-      border-color: var(--color-primary-light);
+      transform: translate3d(0, -8px, 0) rotateX(1deg); 
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
     }
 
     .step-icon {
-      font-size: 3rem;
+      font-size: 3.5rem; 
       color: var(--color-primary-dark);
       margin-bottom: 1rem;
-      position: relative; /* Container for absolute positioning */
-      height: 3rem; /* Ensure container has height */
-      display: flex; /* Helps centering */
+      position: relative; 
+      height: 3.5rem; 
+      display: flex;
       justify-content: center;
       align-items: center;
     }
     
     .step-card h3 {
-        font-size: 1.4rem;
-        color: var(--color-text);
+        font-size: 1.5rem;
+        color: var(--color-primary-dark); 
     }
     
     /* Schloss Transition (Schritt 2) */
     .step-card:nth-child(2) .step-icon i {
-        position: absolute;
-        top: 50%;
-        left: 50%;
+        position: absolute; top: 50%; left: 50%;
         transform: translate(-50%, -50%);
         transition: opacity 0.4s ease, transform 0.4s ease;
     }
-
-    .step-card:nth-child(2) .fa-lock-open {
-        opacity: 0;
-    }
+    .step-card:nth-child(2) .fa-lock-open { opacity: 0; }
+    .step-card:nth-child(2):hover .fa-lock { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    .step-card:nth-child(2):hover .fa-lock-open { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     
-    .step-card:nth-child(2):hover .fa-lock {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.8);
-    }
-
-    .step-card:nth-child(2):hover .fa-lock-open {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    
-    /* NEU: Dreh-Effekt (Schritt 4) */
-    /* Füge eine Transition für die Transformation zum Icon hinzu */
+    /* Dreh-Effekt (Schritt 4) */
     .step-card:nth-child(4) .step-icon i {
-        transition: transform 0.6s ease-in-out; /* 0.6 Sekunden Dreh-Übergang */
-        display: block; /* Stellen Sie sicher, dass Transform angewendet werden kann */
+        transition: transform 0.6s ease-in-out; 
+        display: block;
     }
-
-    /* Beim Hover der vierten Karte (Zurückbringen) */
     .step-card:nth-child(4):hover .step-icon i {
-        transform: rotate(-360deg); /* Volle 360-Grad-Drehung */
+        transform: rotate(-360deg); 
     }
-
-    /* --- LOCATIONS (Map & Side Content) --- */
+    
+    /* ---------------------------------
+       --- LOCATIONS (Map & Side Content) --- 
+       ---------------------------------- */
     .locations-layout {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 3fr 1fr; 
         gap: var(--spacing-l);
     }
     
     .map-container {
-        border-radius: 12px;
+        border-radius: 16px;
         overflow: hidden;
-        height: 400px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        background-color: #E0E0E0; /* Simuliert Kartenhintergrund */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        color: #777;
+        height: 500px; 
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        border: 4px solid var(--color-accent); 
     }
 
     .location-list {
         background-color: var(--color-white);
-        border-radius: 12px;
-        padding: var(--spacing-m);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        border: 1px solid #ddd;
+        border-radius: 16px;
+        padding: var(--spacing-l);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        border: 1px solid var(--color-bg-light);
     }
     
     .location-list h3 {
-        color: var(--color-primary-dark);
-        border-bottom: 2px solid var(--color-bg-light);
-        padding-bottom: 0.5rem;
+        color: var(--color-text);
+        border-bottom: 2px solid var(--color-accent); 
+        padding-bottom: 0.75rem;
+        margin-bottom: var(--spacing-m);
     }
     
     .location-item {
-        padding: 0.75rem 0;
-        border-bottom: 1px dashed #eee;
+        padding: 1rem 0;
+        border-bottom: 1px solid #eee;
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-weight: 600;
-        transition: background-color 0.3s;
+        transition: background-color 0.3s, padding-left 0.3s;
+        cursor: pointer;
     }
     
     .location-item:last-child {
@@ -437,16 +477,22 @@
     }
     
     .location-item:hover {
-        background-color: #f9f9f9;
-        cursor: pointer;
+        background-color: var(--color-accent);
+        padding-left: 0.5rem; 
     }
     
+    .location-item span {
+        color: var(--color-text);
+    }
+
     .location-item i {
         color: var(--color-primary-dark);
         font-size: 1rem;
     }
 
-    /* --- NEWS (CARDS) --- */
+    /* ---------------------------------
+       --- NEWS (Card-Upgrade) --- 
+       ---------------------------------- */
     .news-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -454,88 +500,92 @@
     }
 
     .news-card {
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
       background: var(--color-white);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      border: 1px solid #eee;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05); 
+      border: none; 
       transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .news-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
     }
 
     .news-card-content {
-      padding: var(--spacing-m);
+      padding: var(--spacing-l);
     }
 
     .news-card h3 {
       color: var(--color-primary-dark);
-      font-size: 1.4rem;
+      font-size: 1.5rem;
     }
 
     .news-meta {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: #999;
       margin-bottom: 0.75rem;
       display: block;
+      font-weight: 600;
     }
 
-    /* --- FOOTER --- */
+    /* ---------------------------------
+       --- FOOTER (Darker/Sleek) --- 
+       ---------------------------------- */
     .footer {
-      background-color: var(--color-text); /* Dunkelgrau */
-      color: var(--color-light-bg);
+      background-color: var(--color-text); 
+      color: rgba(255, 255, 255, 0.9);
       padding: 4rem 0 2rem;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+    }
+    
+    .footer h4 {
+        color: var(--color-accent); 
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--spacing-s);
     }
 
     .footer a {
-        color: var(--color-bg-light);
+        color: rgba(255, 255, 255, 0.7);
+        display: block;
+        padding: 0.2rem 0;
     }
     
     .footer a:hover {
-        color: var(--color-accent); /* NEU: Akzentfarbe für Hover */
+        color: var(--color-white); 
+        transform: translateX(4px); 
     }
     
-    /* --- RESPONSIVENESS --- */
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: var(--spacing-l);
+    }
+    
+    .footer-social i {
+        font-size: 1.5rem;
+        transition: color 0.3s;
+    }
+    
+    .footer-social i:hover {
+        color: var(--color-primary-light);
+    }
+    
+    /* ---------------------------------
+       --- RESPONSIVENESS --- 
+       ---------------------------------- */
     @media (max-width: 1024px) {
-        .hero {
-            clip-path: polygon(0 0, 100% 0, 100% 98%, 0% 100%);
-        }
-        .hero-content {
-            justify-content: center;
-            text-align: center;
-        }
-        .hero-text {
-            max-width: 80%;
-            padding-right: 0;
-        }
-        .hero h1 {
-            font-size: 3.5rem;
-        }
-        .locations-layout {
-            grid-template-columns: 1fr;
-        }
-        .location-list {
-            order: -1; /* Liste über Karte auf Mobil */
-        }
-        /* Mobile Dropdown */
-        .nav-links.active .dropdown-content {
-            position: static;
-            border-top: none;
-            box-shadow: none;
-            background-color: var(--color-primary-light); /* Leichter Kontrast im Mobile Menü */
-            width: 100%;
-            border-radius: 0;
-            padding: 0;
-        }
-        .nav-links.active .dropdown-content a {
-            padding-left: 3rem;
-        }
-        .dropdown > a::after {
-             display: none; /* Hide chevron on mobile toggle, as it expands vertically */
+        h2 { font-size: 2.5rem; }
+        .hero h1 { font-size: 4rem; }
+        .hero p { font-size: 1.3rem; }
+        .locations-layout { grid-template-columns: 1fr; }
+        .location-list { order: -1; }
+        .map-container { height: 400px; }
+        .header { backdrop-filter: none; background-color: var(--color-primary-dark); }
+        .dropdown > a::after { display: none; }
+        .nav-links li:not(:last-child) {
+            margin-right: var(--spacing-m); /* Reduzierter Abstand auf Tablet */
         }
         
     }
@@ -556,25 +606,15 @@
           margin: 0.5rem auto;
           width: 90%;
       }
-      .menu-toggle {
-        display: flex;
-      }
-      .nav-links.active, .nav-actions.active {
-        display: flex;
-      }
+      .menu-toggle { display: flex; }
+      .nav-links.active, .nav-actions.active { display: flex; }
       
-      .hero {
-          padding: 4rem 0;
-      }
-      .hero-text {
-          max-width: 100%;
-      }
-      .hero h1 {
-          font-size: 2.5rem;
-      }
-      .hero p {
-          font-size: 1.1rem;
-      }
+      h2 { font-size: 2rem; }
+      
+      .hero { padding: 5rem 0; }
+      .hero-text { max-width: 100%; }
+      .hero h1 { font-size: 3rem; }
+      .hero p { font-size: 1.1rem; }
       .hero-actions {
           display: flex;
           flex-direction: column;
@@ -583,9 +623,13 @@
       .hero-actions .btn {
           margin-left: 0 !important;
       }
+      .footer-grid {
+          grid-template-columns: 1fr;
+          text-align: center;
+      }
     }
     
-    /* Mobile Menu Toggle (behalten) */
+    /* Mobile Menu Toggle */
     .menu-toggle {
       display: none;
       flex-direction: column;
@@ -593,7 +637,6 @@
       padding: 5px;
       z-index: 1100;
     }
-
     .bar {
       width: 28px;
       height: 3px;
@@ -602,7 +645,6 @@
       transition: 0.4s;
       border-radius: 2px;
     }
-    
     .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
     .menu-toggle.active .bar:nth-child(1) { transform: translate(0, 7px) rotate(-45deg); }
     .menu-toggle.active .bar:nth-child(3) { transform: translate(0, -7px) rotate(45deg); }
@@ -617,7 +659,7 @@
 
     <nav>
       <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Ausleihen</a></li> 
+        <li><a href="index.html#ausleihen">Ausleihen</a></li> 
         
         <li><a href="#aktuelles">Aktuelles</a></li>
         
@@ -659,14 +701,14 @@
         <h1>DEIN LASTENRAD IN KARLSRUHE.</h1>
         <p>Kostenfrei, nachhaltig & immer in Deiner Nähe. Erlebe die Freiheit des Lastentransports.</p>
         <div class="hero-actions">
-            <a href="#ausleihen" class="btn btn-primary">Jetzt Rad finden</a>
+            <a href="#standorte" class="btn btn-primary">Jetzt Rad finden</a>
             <a href="#mitmachen" class="btn btn-secondary" style="margin-left: 1rem;">Mitmachen & Spenden</a>
         </div>
     </div>
   </div>
 </section>
 
-<section id="ausleihen" class="section-dark-bg">
+<section id="ausleihen"> 
   <div class="container">
     <h2>🚲 So funktioniert die Ausleihe</h2>
     <div class="steps-grid">
@@ -716,6 +758,7 @@
                 marginwidth="0" 
                 src="https://www.openstreetmap.org/export/embed.html?bbox=8.3846%2C49.0069%2C8.4246%2C49.0269&amp;layer=cycle&amp;marker=49.0169,8.4046" 
                 style="border: 0; border-radius: 12px;"
+                title="Karte der Lastenrad-Standorte"
             >
             </iframe>
         </div>
@@ -742,8 +785,8 @@
                 <span>Malsch - Stadtmitte</span>
                 <i class="fas fa-arrow-right"></i>
             </div>
-            <div style="text-align: center; margin-top: 1rem;">
-                <a href="#" class="btn btn-small" style="background-color: var(--color-primary-dark); color: var(--color-white); border: none;">Alle Stationen anzeigen</a>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="#" class="btn btn-small btn-dark">Alle Stationen anzeigen</a>
             </div>
         </div>
     </div>
@@ -759,7 +802,7 @@
           <h3>Neue Station: SteamWork | GoodSpaces</h3>
           <span class="news-meta">10. September 2025</span>
           <p>Zwei weitere Lastenräder sind nun in der Südweststadt verfügbar! Hier gibt es alle Details zum Verleihstart.</p>
-          <a href="#" class="btn btn-small" style="margin-top: 1rem; background-color: var(--color-primary-light); color: var(--color-white);">Zum Beitrag</a>
+          <a href="#" class="btn btn-small btn-primary" style="margin-top: 1rem;">Zum Beitrag</a>
         </div>
       </div>
       <div class="news-card">
@@ -767,7 +810,7 @@
           <h3>Lastenkarle jetzt auch in Eggenstein</h3>
           <span class="news-meta">26. Juli 2025</span>
           <p>Ab sofort steht unsere beliebte Bakfiets Classic in Eggenstein für euch zur Buchung bereit.</p>
-          <a href="#" class="btn btn-small" style="margin-top: 1rem; background-color: var(--color-primary-light); color: var(--color-white);">Zum Beitrag</a>
+          <a href="#" class="btn btn-small btn-primary" style="margin-top: 1rem;">Zum Beitrag</a>
         </div>
       </div>
       <div class="news-card">
@@ -775,12 +818,12 @@
           <h3>Projekt-Meilenstein: Die neue Rikscha ist da!</h3>
           <span class="news-meta">15. Juli 2025</span>
           <p>Dank eurer Spenden ist unsere brandneue Rikscha eingetroffen! Wir danken allen Unterstützern.</p>
-          <a href="#" class="btn btn-small" style="margin-top: 1rem; background-color: var(--color-primary-light); color: var(--color-white);">Zum Beitrag</a>
+          <a href="#" class="btn btn-small btn-primary" style="margin-top: 1rem;">Zum Beitrag</a>
         </div>
       </div>
     </div>
     <div style="text-align: center; margin-top: 3rem;">
-      <a href="#" class="btn btn-primary">Alle Neuigkeiten & Events</a>
+      <a href="#" class="btn btn-dark">Alle Neuigkeiten & Events</a>
     </div>
   </div>
 </section>
@@ -788,15 +831,15 @@
 <section id="mitmachen">
   <div class="container" style="text-align: center;">
     <h2>🤝 Deine Unterstützung hält uns am Laufen!</h2>
-    <p style="font-size: 1.2rem; margin-bottom: var(--spacing-l); max-width: 800px; margin-left: auto; margin-right: auto;">Als rein ehrenamtliche Initiative leben wir von Mitgliedsbeiträgen und Spenden. Werde Teil der Bewegung für nachhaltige Mobilität.</p>
+    <p style="font-size: 1.3rem; margin-bottom: var(--spacing-l); max-width: 800px; margin-left: auto; margin-right: auto;">Als rein ehrenamtliche Initiative leben wir von Mitgliedsbeiträgen und Spenden. Werde Teil der Bewegung für nachhaltige Mobilität.</p>
     <a href="mitglied-werden.html" class="btn btn-primary">Mitglied werden</a>
-    <a href="#" class="btn btn-small" style="margin-left: 1rem; background-color: var(--color-primary-dark); color: var(--color-white);">Einmalig Spenden</a>
+    <a href="#" class="btn btn-dark" style="margin-left: 1rem;">Einmalig Spenden</a>
   </div>
 </section>
 
 <footer class="footer">
   <div class="container">
-    <div class="footer-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-l);">
+    <div class="footer-grid">
       <div class="footer-about">
         <h4><i class="fas fa-bicycle"></i> Lastenkarle</h4>
         <p>Lastenrad-Initiative für die Region Karlsruhe e.V. Deine Mobilität, unser Beitrag.</p>
@@ -838,7 +881,7 @@
 </footer>
 
 <script>
-  // JavaScript für das Mobile Menü (wie vorher)
+  // JavaScript für das Mobile Menü
   document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
@@ -853,8 +896,6 @@
 
     navItems.forEach(item => {
       item.addEventListener('click', () => {
-        // Schließe das Menü nur, wenn es sich nicht um den Dropdown-Header handelt,
-        // da das Dropdown auf mobilen Geräten statisch erweitert wird.
         if (navLinks.classList.contains('active') && !item.closest('.dropdown')) {
           menuToggle.classList.remove('active');
           navLinks.classList.remove('active');
