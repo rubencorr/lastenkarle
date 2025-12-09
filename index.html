@@ -135,8 +135,13 @@
       font-weight: 900;
       color: var(--color-white);
       letter-spacing: -1px;
+      line-height: 1; /* Fix for alignment */
     }
     
+    .logo a {
+        color: var(--color-white);
+    }
+
     .logo i {
         color: var(--color-accent); /* NEU: Akzentfarbe für Icon */
         margin-right: 0.5rem;
@@ -158,6 +163,7 @@
       padding: 0.5rem 1rem;
       border-bottom: 3px solid transparent;
       transition: color 0.3s, border-color 0.3s;
+      display: block; /* Wichtig für Dropdown-Links */
     }
 
     .nav-links a:hover {
@@ -169,6 +175,65 @@
         margin-left: 0.75rem;
         padding: 0.75rem 1.5rem;
         box-shadow: none;
+    }
+
+    /* --- DROPDOWN STYLING (NEW) --- */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: var(--color-primary-dark);
+        min-width: 180px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 100;
+        top: 100%; /* Positioniert direkt unter dem Link */
+        left: 0;
+        padding: 0.5rem 0;
+        border-radius: 0 0 8px 8px;
+        border-top: 3px solid var(--color-accent);
+    }
+
+    .dropdown-content a {
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        color: rgba(255, 255, 255, 0.9);
+        border-bottom: none; /* Keine Linie unter Dropdown-Links */
+    }
+
+    .dropdown-content a:hover {
+        background-color: var(--color-primary-light);
+        color: var(--color-white);
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown > a {
+        /* Pfeil-Icon für Dropdown-Link */
+        position: relative;
+        padding-right: 2rem;
+    }
+
+    .dropdown > a::after {
+        content: '\f078'; /* Chevron Down Icon */
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 0.75rem;
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.2s ease;
+    }
+
+    .dropdown:hover > a::after {
+        transform: translateY(-50%) rotate(180deg);
     }
     
     /* --- HERO SECTION (High-Contrast, Background Image) --- */
@@ -231,9 +296,6 @@
       color: rgba(255, 255, 255, 0.9);
     }
     
-    /* Das separate .hero-image-Element wird entfernt, da das Bild jetzt der Hintergrund ist */
-
-
     /* --- SECTION STYLING --- */
     section {
       padding: var(--spacing-xl) 0;
@@ -459,6 +521,22 @@
         .location-list {
             order: -1; /* Liste über Karte auf Mobil */
         }
+        /* Mobile Dropdown */
+        .nav-links.active .dropdown-content {
+            position: static;
+            border-top: none;
+            box-shadow: none;
+            background-color: var(--color-primary-light); /* Leichter Kontrast im Mobile Menü */
+            width: 100%;
+            border-radius: 0;
+            padding: 0;
+        }
+        .nav-links.active .dropdown-content a {
+            padding-left: 3rem;
+        }
+        .dropdown > a::after {
+             display: none; /* Hide chevron on mobile toggle, as it expands vertically */
+        }
         
     }
 
@@ -535,13 +613,21 @@
 
 <header class="header">
   <div class="container nav-content">
-    <div class="logo"><i class="fas fa-bicycle"></i> Lastenkarle</div>
+    <div class="logo"><a href="index.html"><i class="fas fa-bicycle"></i> Lastenkarle</a></div>
 
     <nav>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#ausleihen">Ausleihen</a></li>
+        <li><a href="index.html">Ausleihen</a></li> 
         <li><a href="#standorte">Standorte</a></li>
-        <li><a href="#mitmachen">Mitmachen</a></li>
+        
+        <li class="dropdown">
+            <a href="index.html#mitmachen">Mitmachen</a>
+            <div class="dropdown-content">
+                <a href="mitglied-werden.html">Mitglied werden</a>
+                <a href="#">Aktiv werden</a>
+                <a href="#">Station werden</a>
+            </div>
+        </li>
         <li><a href="#aktuelles">Aktuelles</a></li>
       </ul>
     </nav>
@@ -695,7 +781,7 @@
   <div class="container" style="text-align: center;">
     <h2>🤝 Deine Unterstützung hält uns am Laufen!</h2>
     <p style="font-size: 1.2rem; margin-bottom: var(--spacing-l); max-width: 800px; margin-left: auto; margin-right: auto;">Als rein ehrenamtliche Initiative leben wir von Mitgliedsbeiträgen und Spenden. Werde Teil der Bewegung für nachhaltige Mobilität.</p>
-    <a href="#" class="btn btn-primary">Mitglied werden</a>
+    <a href="mitglied-werden.html" class="btn btn-primary">Mitglied werden</a>
     <a href="#" class="btn btn-small" style="margin-left: 1rem; background-color: var(--color-primary-dark); color: var(--color-white);">Einmalig Spenden</a>
   </div>
 </section>
@@ -711,7 +797,7 @@
         <h4>Navigation</h4>
         <ul>
           <li><a href="#ausleihen">Rad Ausleihen</a></li>
-          <li><a href="#mitmachen">Mitglied werden</a></li>
+          <li><a href="mitglied-werden.html">Mitglied werden</a></li>
           <li><a href="#">Unser Team</a></li>
           <li><a href="#aktuelles">Events</a></li>
         </ul>
@@ -759,7 +845,9 @@
 
     navItems.forEach(item => {
       item.addEventListener('click', () => {
-        if (navLinks.classList.contains('active')) {
+        // Schließe das Menü nur, wenn es sich nicht um den Dropdown-Header handelt,
+        // da das Dropdown auf mobilen Geräten statisch erweitert wird.
+        if (navLinks.classList.contains('active') && !item.closest('.dropdown')) {
           menuToggle.classList.remove('active');
           navLinks.classList.remove('active');
           navActions.classList.remove('active');

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Station werden | Lastenkarle</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* --- VARIABLES & RESET (UNCHANGED from main style) --- */
+    :root {
+      --color-primary-dark: #B0040E;
+      --color-primary-light: #D52D37;
+      --color-accent: #FADCE0;
+      --color-text: #2C3E50;
+      --color-bg-light: #F4F4F4;
+      --color-white: #FFFFFF;
+      --font-family: 'Inter', 'Arial', sans-serif;
+      --spacing-xl: 4rem;
+      --spacing-l: 2.5rem;
+      --spacing-m: 1.5rem;
+      --header-height: 80px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--color-text);
+      line-height: 1.6;
+      background-color: var(--color-white);
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: var(--color-primary-dark);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: var(--color-accent);
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin-bottom: var(--spacing-m);
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: var(--spacing-l);
+      font-weight: 800;
+      color: var(--color-text);
+    }
+    
+    h3 {
+        font-size: 1.75rem;
+        color: var(--color-primary-dark);
+        margin-top: var(--spacing-l);
+        border-bottom: 2px solid var(--color-accent);
+        padding-bottom: 0.5rem;
+    }
+
+    /* --- UTILITY CLASSES --- */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-m);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.2rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-align: center;
+      border: 2px solid transparent;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background-color: var(--color-accent);
+      color: var(--color-text);
+    }
+
+    .btn-primary:hover {
+      background-color: #F4C1C8;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(176, 4, 14, 0.3);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--color-white);
+      border-color: var(--color-white);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-white);
+      color: var(--color-primary-dark);
+      transform: translateY(-3px);
+    }
+    
+    .btn-small {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    /* --- HEADER & NAVIGATION (Minimal changes for logo link) --- */
+    .header {
+      background-color: var(--color-primary-dark);
+      height: var(--header-height);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--color-white);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    
+    .logo a {
+        color: var(--color-white);
+    }
+
+    .logo i {
+        color: var(--color-accent);
+        margin-right: 0.5rem;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      margin-left: 2rem;
+    }
+
+    .nav-links li:not(:last-child) {
+      margin-right: var(--spacing-m);
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 0.5rem 1rem;
+      border-bottom: 3px solid transparent;
+      transition: color 0.3s, border-color 0.3s;
+      display: block;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-white);
+      border-color: var(--color-accent);
+    }
+    
+    .nav-actions .btn {
+        margin-left: 0.75rem;
+        padding: 0.75rem 1.5rem;
+        box-shadow: none;
+    }
+
+    /* --- DROPDOWN STYLING (Same as index.html) --- */
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: var(--color-primary-dark);
+        min-width: 180px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 100;
+        top: 100%;
+        left: 0;
+        padding: 0.5rem 0;
+        border-radius: 0 0 8px 8px;
+        border-top: 3px solid var(--color-accent);
+    }
+
+    .dropdown-content a {
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+        color: rgba(255, 255, 255, 0.9);
+        border-bottom: none;
+    }
+
+    .dropdown-content a:hover {
+        background-color: var(--color-primary-light);
+        color: var(--color-white);
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown > a {
+        position: relative;
+        padding-right: 2rem;
+        /* Hinzufügen der aktiven Klasse für den aktuellen Dropdown-Header */
+        color: var(--color-white); 
+        border-color: var(--color-accent); 
+    }
+
+    .dropdown > a::after {
+        content: '\f078';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        font-size: 0.75rem;
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.2s ease;
+    }
+
+    .dropdown:hover > a::after {
+        transform: translateY(-50%) rotate(180deg);
+    }
+
+    /* --- HERO SECTION (HEADER IMAGE) --- */
+    .hero {
+      position: relative;
+      background-color: var(--color-primary-dark);
+      padding: 4rem 0;
+      overflow: hidden;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); 
+    }
+    
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: url('media/IMG_6556.jpg') no-repeat center center/cover;
+        background-color: rgba(176, 4, 14, 0.85); 
+        background-blend-mode: multiply;
+        opacity: 1; 
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        min-height: 250px;
+        text-align: center;
+    }
+    
+    .hero-text {
+        color: var(--color-white);
+        max-width: 70%;
+        padding-right: 0;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: var(--spacing-m);
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    /* --- CONTENT STYLING (Specific to this page) --- */
+    .section-content {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .role-section {
+        margin-bottom: var(--spacing-xl);
+        padding: var(--spacing-m) 0;
+        border-radius: 8px;
+    }
+    
+    .role-section:nth-child(even) {
+        background-color: var(--color-bg-light);
+        padding: var(--spacing-l);
+    }
+
+    .role-description {
+        font-size: 1.1rem;
+        margin-bottom: var(--spacing-m);
+        font-weight: 500;
+        color: var(--color-text);
+    }
+
+    .tasks-list {
+        list-style: none;
+        padding-left: 0;
+    }
+    
+    .tasks-list li {
+        margin-bottom: 0.75rem;
+        padding-left: 1.5rem;
+        position: relative;
+        font-weight: 400;
+    }
+
+    .tasks-list li::before {
+        content: '\f058'; /* Checkmark icon (Font Awesome) */
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        color: var(--color-primary-light);
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .highlight-box {
+        background-color: var(--color-accent);
+        padding: var(--spacing-m);
+        border-radius: 8px;
+        text-align: center;
+        margin-top: var(--spacing-xl);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--color-text);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+        .hero-text {
+            max-width: 90%;
+        }
+        /* Mobile Dropdown */
+        .nav-links.active .dropdown-content {
+            position: static;
+            border-top: none;
+            box-shadow: none;
+            background-color: var(--color-primary-light);
+            width: 100%;
+            border-radius: 0;
+            padding: 0;
+        }
+        .nav-links.active .dropdown-content a {
+            padding-left: 3rem;
+        }
+        .dropdown > a::after {
+             display: none; 
+        }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container nav-content">
+    <div class="logo"><a href="index.html"><i class="fas fa-bicycle"></i> Lastenkarle</a></div>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Ausleihen</a></li>
+        <li><a href="index.html#standorte">Standorte</a></li>
+        
+        <li class="dropdown">
+            <a href="index.html#mitmachen" class="active-dropdown-header">Mitmachen</a>
+            <div class="dropdown-content">
+                <a href="mitglied-werden.html">Mitglied werden</a>
+                <a href="aktiv-werden.html">Aktiv werden</a>
+                <a href="station-werden.html" style="background-color: var(--color-primary-light); color: var(--color-white);">Station werden</a>
+            </div>
+        </li>
+        <li><a href="index.html#aktuelles">Aktuelles</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions" id="navActions">
+      <a href="#" class="btn btn-secondary btn-small">SPENDEN</a>
+      <a href="#" class="btn btn-primary btn-small">Jetzt Buchen</a>
+    </div>
+
+    <div class="menu-toggle" id="menuToggle">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-content">
+    <div class="hero-text">
+        <h1>Werde Verleih-Station oder Standort-Scout!</h1>
+        <p>Mache Dein Geschäft, Dein Café oder Deine Einrichtung zum Herzstück unseres Lastenrad-Netzwerks in Karlsruhe.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-content">
+  <div class="container">
+    <h2 style="margin-bottom: 0;">Deine Rolle im Lastenkarle-Netzwerk</h2>
+    <p style="font-size: 1.2rem; margin-bottom: var(--spacing-xl); text-align: center;">
+        Wir suchen **Unternehmen, Vereine oder Organisationen** sowie **engagierte Einzelpersonen** (Netzwerk-Genies), die uns helfen, unser Netzwerk aus Lastenrädern kontinuierlich zu erweitern.
+    </p>
+
+    <div class="role-section">
+        <h3>Stations-Pat:in / Gastgeber:in 🏠</h3>
+        <p class="role-description">
+            Du betreibst ein Geschäft, einen Verein oder eine andere öffentlich zugängliche Einrichtung und möchtest einen unserer Lastenkarle-Standorte hosten?
+            Als Stations-Pat:in übernimmst Du die wichtigste Aufgabe: **die sichere Aufbewahrung und Ausgabe des Rades**.
+            
+        </p>
+        <ul class="tasks-list">
+            <li>**Sicherer Standort:** Du stellst einen leicht zugänglichen, diebstahlsicheren Platz (z. B. im Laden, in der Garage) für das Lastenrad zur Verfügung.</li>
+            <li>**Ansprechperson:** Deine Mitarbeitenden oder Du bist die erste Anlaufstelle für Ausleihende bei Fragen zur Abholung oder Rückgabe.</li>
+            <li>**Regelmäßige Checks:** Optional unterstützt Du uns mit regelmäßigen Kontrollen von Luftdruck, Bremsen und Licht.</li>
+            <li>**Lokale Sichtbarkeit:** Du profitierst von erhöhter Aufmerksamkeit und Fußgängerverkehr in Deinem Umfeld.</li>
+        </ul>
+        <p style="margin-top: var(--spacing-m); font-style: italic;">
+            *Hinweis: Wenn Du zusätzlich eine **ehrenamtliche Patenschaft** für die Wartung des Rades übernehmen möchtest, kannst Du die Aufgaben des "Stations-Pat:in" von der Seite "Mitglied werden" optional übernehmen.*
+        </p>
+    </div>
+    
+    <div class="role-section">
+        <h3>Netzwerk-Genie / Standort-Scout 🗺️</h3>
+        <p class="role-description">
+            Du hast Spaß daran, Kontakte in der Region zu knüpfen und uns zu helfen, **neue Verleihstationen** zu finden? Damit unsere Lastenräder an den besten Orten stehen und einfach ausgeliehen werden können, bist Du bei uns herzlich willkommen!
+        </p>
+        <ul class="tasks-list">
+            <li>**Brücken bauen:** Du gehst aktiv auf Einzelhändler, Gewerbetreibende, Vereine und andere Einrichtungen zu, die sich für eine Kooperation begeistern könnten.</li>
+            <li>**Ideen schmieden:** Du nutzt unsere bewährten Kooperationsmodelle oder entwickelst sie mit deinen eigenen kreativen Ideen weiter.</li>
+            <li>**Gespräche führen:** Du organisierst und führst Gespräche mit potenziellen Partnern.</li>
+            <li>**Verträge gestalten:** Gemeinsam mit dem Vorstand bringst du neue Kooperationsvereinbarungen auf den Weg.</li>
+            <li>**Wegbereiter:in für neue Standorte:** Du unterstützt die Vorbereitung und Eröffnung neuer Lastenrad-Stationen.</li>
+        </ul>
+    </div>
+
+    
+    <div class="highlight-box">
+        Bist Du bereit, Deinen Standort zum Lastenrad-Hotspot zu machen oder uns beim Aufbau neuer Stationen zu helfen? Nimm Kontakt auf!
+        <div style="margin-top: 1.5rem;">
+            <a href="#" class="btn btn-primary">Standort-Anfrage stellen</a>
+            <a href="#" class="btn btn-small" style="margin-left: 1rem; background-color: var(--color-primary-dark); color: var(--color-white); border-color: var(--color-primary-dark);">E-Mail schreiben</a>
+        </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-l);">
+      <div class="footer-about">
+        <h4><i class="fas fa-bicycle"></i> Lastenkarle</h4>
+        <p>Lastenrad-Initiative für die Region Karlsruhe e.V. Deine Mobilität, unser Beitrag.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html#ausleihen">Rad Ausleihen</a></li>
+          <li><a href="mitglied-werden.html">Mitglied werden</a></li>
+          <li><a href="#">Unser Team</a></li>
+          <li><a href="index.html#aktuelles">Events</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="#">Nutzungsbedingungen</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">AGB</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h4>Folge uns</h4>
+        <div class="social-links">
+          <a href="#" target="_blank"><i class="fab fa-facebook-f" style="margin-right: 1rem;"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <address style="margin-top: 1rem; font-style: normal; line-height: 1.4;">
+          Kronenstr. 9<br>
+          76133 Karlsruhe
+        </address>
+      </div>
+    </div>
+    <div class="footer-bottom" style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center;">
+      &copy; 2025 Lastenkarle. Alle Rechte vorbehalten.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // JavaScript für das Mobile Menü (beibehalten)
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const navActions = document.getElementById('navActions');
+    const navItems = document.querySelectorAll('#navLinks a, #navActions a');
+
+    menuToggle.addEventListener('click', function() {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      navActions.classList.toggle('active');
+    });
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        if (navLinks.classList.contains('active') && !item.closest('.dropdown')) {
+          menuToggle.classList.remove('active');
+          navLinks.classList.remove('active');
+          navActions.classList.remove('active');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
